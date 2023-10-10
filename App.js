@@ -108,7 +108,10 @@ const ModalView = () => {
     onPanResponderGrant: () => false,
     onMoveShouldSetPanResponder: () => true,
     onPanResponderMove: (evt, gestureState) => {
-      Animated.event([null, { dx: pan.x, dy: pan.y }], {})(evt, gestureState);
+      Animated.event([null, { dx: pan.x, dy: pan.y }], {
+        useNativeDriver: true,
+        l,
+      })(evt, gestureState);
     },
   });
 
@@ -118,13 +121,14 @@ const ModalView = () => {
     onPanResponderGrant: () => true,
     onMoveShouldSetPanResponder: () => true,
     onPanResponderMove: (evt, gestureState) => {
-      Animated.event([null, { dx: pan2.x, dy: pan2.y }], {})(evt, gestureState);
+      Animated.event([null, { dx: pan2.x, dy: pan2.y }], {
+        useNativeDriver: true,
+        l,
+      })(evt, gestureState);
     },
   });
 
   const bottomSheetModalRef = useRef(null);
-
-  const [showModal, setShowModal] = useState(false);
 
   return (
     <BottomSheetModalProvider>
